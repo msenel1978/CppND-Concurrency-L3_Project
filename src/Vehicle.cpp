@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <mutex>
 #include "Street.h"
 #include "Intersection.h"
 #include "Vehicle.h"
@@ -34,7 +35,9 @@ void Vehicle::drive()
     // L3.3 : Ensure that the text output locks the console as a shared resource. Use the mutex _mtxCout you have added to the base class TrafficObject in the previous task. 
 
     // print id of the current thread
+    _mtxCout.lock();
     std::cout << "Vehicle #" << _id << "::drive: thread id = " << std::this_thread::get_id() << std::endl;
+    _mtxCout.unlock();
 
     // initalize variables
     bool hasEnteredIntersection = false;
